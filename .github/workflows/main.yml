@@ -20,4 +20,4 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }} # Username FTP
         password: ${{ secrets.FTP_PASSWORD }} # Password FTP
         local-dir: ./Santana/  # Path relative to the root of the repository
-        server-dir: /home/handyann/Santana  # Path on the server
+        server-dir: /home/handyann/Santana/  # Path on the server
