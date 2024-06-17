@@ -1,34 +1,34 @@
-name: Deploy to cPanel via FTP
+name: Deploy to cPanel
 
 on:
   push:
     branches:
-      - main  # Ganti dengan branch yang sesuai
+      - main  # Atur sesuai dengan branch yang ingin Anda deploy
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '21'  # Ganti dengan versi Node.js yang sesuai
+        node-version: '18'  # Sesuaikan dengan versi Node.js yang Anda gunakan
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: npm install
 
-    - name: Build project
+    - name: Build Project
       run: npm run build
 
-    - name: Upload files via FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+    - name: Deploy to cPanel
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ${{ secrets.FTP_SERVER }}   # Ganti sesuai dengan URL FTP server
-        username: ${{ secrets.FTP_USERNAME }} # Username FTP
-        password: ${{ secrets.FTP_PASSWORD }} # Password FTP
-        local-dir: ./Santana/  # Path ke folder yang ingin di-upload
-        server-dir: /home/handyann/Santana/  # Path di server, pastikan berakhir dengan '/'
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./build  # Sesuaikan dengan direktori build Anda
+        remote-dir: /Santana/  # Sesuaikan dengan direktori di cPanel Anda
