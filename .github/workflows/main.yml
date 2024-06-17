@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -16,8 +16,8 @@ jobs:
     - name: Upload files via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
-        ftp-server: ${{ secrets.FTP_SERVER }}
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./Santana
-        remote-dir: /home/handyann/Santana  # Ganti dengan path yang sesuai di server cPanel
+        server: ${{ secrets.FTP_SERVER }}   # Ganti sesuai dengan URL FTP server
+        username: ${{ secrets.FTP_USERNAME }} # Username FTP
+        password: ${{ secrets.FTP_PASSWORD }} # Password FTP
+        local-dir: ./Santana  # Path relative to the root of the repository
+        server-dir: /home/handyann/Santana  # Path on the server
