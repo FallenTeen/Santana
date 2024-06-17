@@ -19,5 +19,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}   # Ganti sesuai dengan URL FTP server
         username: ${{ secrets.FTP_USERNAME }} # Username FTP
         password: ${{ secrets.FTP_PASSWORD }} # Password FTP
-        local-dir: ./Santana  # Path relative to the root of the repository
+        local-dir: ./Santana/  # Path relative to the root of the repository
         server-dir: /home/handyann/Santana  # Path on the server
