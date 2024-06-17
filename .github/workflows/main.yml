@@ -1,17 +1,23 @@
-on: push
-name: 🚀 Deploy website on push
+name: Deploy to cPanel via FTP
+
+on:
+  push:
+    branches:
+      - main  # Ganti dengan branch yang sesuai
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
     
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Upload files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
-        server: handyannn.my.id
-        username: ${{ secrets.ftp_username }}
-        password: ${{ secrets.ftp_password }}
-        server-dir: /home/handyann/Santana/
+        ftp-server: ${{ secrets.FTP_SERVER }}
+        ftp-username: ${{ secrets.FTP_USERNAME }}
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./Santana
+        remote-dir: /home/handyann/Santana  # Ganti dengan path yang sesuai di server cPanel
