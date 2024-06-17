@@ -6,12 +6,23 @@ on:
       - main  # Ganti dengan branch yang sesuai jika berbeda
 
 jobs:
-  deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'  # Sesuaikan dengan versi Node.js yang Anda gunakan
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Project
+      run: npm run build
 
     - name: Set up FTP Deployment
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -19,6 +30,6 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./
-        remote-dir: /public_html/ # Ganti dengan path ke direktori di cPanel Anda
+        local-dir: ./  # Path ke direktori lokal Anda, di sini adalah root repository
+        remote-dir: /public_html/  # Ganti dengan path ke direktori di cPanel Anda
         clean: true  # Hapus file di server yang tidak ada di lokal
