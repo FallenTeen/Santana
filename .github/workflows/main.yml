@@ -3,7 +3,7 @@ name: Deploy to cPanel
 on:
   push:
     branches:
-      - main  # Atur sesuai dengan branch yang ingin Anda deploy
+      - main  # Ganti dengan branch yang sesuai jika berbeda
 
 jobs:
   deploy:
@@ -13,22 +13,12 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '21'  # Sesuaikan dengan versi Node.js yang Anda gunakan
-
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Build Project
-      run: npm run build
-
-    - name: Deploy to cPanel
+    - name: Set up FTP Deployment
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./build  # Sesuaikan dengan direktori build Anda
-        remote-dir: /Santana/  # Sesuaikan dengan direktori di cPanel Anda
+        local-dir: ./
+        remote-dir: /public_html/ # Ganti dengan path ke direktori di cPanel Anda
+        clean: true  # Hapus file di server yang tidak ada di lokal
