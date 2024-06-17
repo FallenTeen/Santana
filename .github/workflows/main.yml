@@ -31,5 +31,4 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./  # Path ke direktori lokal Anda, di sini adalah root repository
-        remote-dir: /public_html/  # Ganti dengan path ke direktori di cPanel Anda
-        clean: true  # Hapus file di server yang tidak ada di lokal
+        server-dir: /public_html/  # Ganti dengan path ke direktori di cPanel Anda
